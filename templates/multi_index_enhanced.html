@@ -809,37 +809,7 @@
             });
         });
 
-        // 时间周期按钮交互
-        document.querySelectorAll('.period-select button').forEach(button => {
-            button.addEventListener('click', function() {
-                // 获取同组的所有按钮
-                const group = this.parentElement;
-                const buttons = group.querySelectorAll('button');
-                const label = group.querySelector('label').textContent;
-                
-                // 移除同组其他按钮的激活状态
-                buttons.forEach(btn => {
-                    btn.style.background = '#64748b';
-                    btn.style.color = '#fff';
-                    btn.style.fontWeight = 'normal';
-                });
-                
-                // 激活当前按钮
-                this.style.background = '#10b981';
-                this.style.color = '#fff';
-                this.style.fontWeight = '600';
-                
-                // 保存到配置
-                const period = this.textContent.trim();
-                if (label.includes('短线')) {
-                    analysisConfig.timePeriods.short = period;
-                } else if (label.includes('趋势')) {
-                    analysisConfig.timePeriods.trend = period;
-                }
-                
-                console.log('选中时间周期:', period, '类型:', label);
-            });
-        });
+        // 注意：时间周期按钮事件在 window.onload 中绑定
 
         // 运行分析
         function runAnalysis() {
@@ -937,6 +907,44 @@
 
         // 页面加载时初始化
         window.onload = function() {
+            console.log('页面加载完成，绑定时间周期按钮...');
+            
+            // 重新绑定时间周期按钮事件
+            document.querySelectorAll('.period-select button').forEach(button => {
+                button.addEventListener('click', function() {
+                    console.log('按钮被点击:', this.textContent);
+                    
+                    // 获取同组的所有按钮
+                    const group = this.parentElement;
+                    const buttons = group.querySelectorAll('button');
+                    const label = group.parentElement.querySelector('label').textContent;
+                    
+                    // 移除同组其他按钮的激活状态
+                    buttons.forEach(btn => {
+                        btn.style.background = '#64748b';
+                        btn.style.color = '#fff';
+                        btn.style.fontWeight = 'normal';
+                    });
+                    
+                    // 激活当前按钮
+                    this.style.background = '#10b981';
+                    this.style.color = '#fff';
+                    this.style.fontWeight = '600';
+                    
+                    // 保存到配置
+                    const period = this.textContent.trim();
+                    if (label.includes('短线')) {
+                        analysisConfig.timePeriods.short = period;
+                        console.log('设置短线周期:', period);
+                    } else if (label.includes('趋势')) {
+                        analysisConfig.timePeriods.trend = period;
+                        console.log('设置趋势周期:', period);
+                    }
+                    
+                    console.log('当前配置:', analysisConfig.timePeriods);
+                });
+            });
+            
             loadOverview();
             setInterval(loadOverview, 30000); // 每30秒刷新一次
         };

@@ -373,10 +373,25 @@ class AIAnalyzer:
         
         prompt_parts.append(f"🔍 **关键信号**: {', '.join(sentiment_signals) if sentiment_signals else '市场平稳'}")
         
+        # 添加时间周期信息
+        time_periods = config.get('timePeriods', {})
+        if time_periods:
+            period_text = f"""
+⏱️ **时间周期配置**
+• 短线周期: {time_periods.get('short', '4h')}
+• 趋势周期: {time_periods.get('trend', '1D')}
+"""
+            prompt_parts.append(period_text)
+        
         # 添加分析要求
         if not config.get('customPrompt'):
-            prompt_parts.append("""
+            period_hint = ""
+            if time_periods:
+                period_hint = f"请特别关注{time_periods.get('short', '4h')}和{time_periods.get('trend', '1D')}周期的趋势。"
+            
+            prompt_parts.append(f"""
 请作为专业的量化交易员，综合以上数据进行深度分析：
+{period_hint}
 
 **请给出：**
 1. 市场情绪判断（看多/看空/中性）

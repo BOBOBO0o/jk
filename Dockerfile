@@ -35,6 +35,7 @@ EXPOSE 5001
 
 # 设置PYTHONPATH
 ENV PYTHONPATH=/app
+ENV FLASK_APP=cloud_api_server.py
 
-# 启动命令（直接启动API服务器）
-CMD ["python", "-m", "gunicorn", "-w", "2", "-b", "0.0.0.0:5001", "--timeout", "120", "--chdir", "/app", "cloud_api_server:app"]
+# 启动命令（使用Flask内置服务器）
+CMD ["python", "-c", "from cloud_api_server import app; app.run(host='0.0.0.0', port=5001, debug=False)"]

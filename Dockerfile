@@ -21,6 +21,12 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 # 复制项目文件
 COPY . .
 
+# 验证文件是否存在
+RUN ls -la /app/ && \
+    echo "Checking critical files:" && \
+    ls -la /app/*.py && \
+    test -f /app/cloud_api_server.py || (echo "ERROR: cloud_api_server.py missing!" && exit 1)
+
 # 创建数据目录
 RUN mkdir -p /app/data
 

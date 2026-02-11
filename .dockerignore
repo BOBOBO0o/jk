@@ -52,5 +52,5 @@ test_*.py
 # 批处理脚本（Windows特有）
 *.bat
 
-# 临时文件
-temp_*.py
+# 临时文件（但保留启动脚本）
+temp_collector.py

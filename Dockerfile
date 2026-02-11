@@ -1,5 +1,5 @@
 # 使用Python 3.10作为基础镜像
-# Build version: 2024-02-11-v2
+# Build version: 2024-02-11-v3 - Fixed dockerignore
 FROM python:3.10-slim
 
 # 设置工作目录

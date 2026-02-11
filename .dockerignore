@@ -2,55 +2,45 @@
 .git
 .gitignore
 
-# Python
+# Python缓存
 __pycache__
 *.pyc
 *.pyo
 *.pyd
 .Python
 *.so
-*.egg
-*.egg-info
-dist
-build
 
 # 虚拟环境
-venv
-env
-ENV
+venv/
+env/
+ENV/
 
 # IDE
-.vscode
-.idea
-*.swp
-*.swo
+.vscode/
+.idea/
 
-# 数据文件（会在运行时生成）
+# 数据文件
 crypto_data.db
 *.db
-
-# 日志
 *.log
 
 # Windows
 Thumbs.db
-desktop.ini
 
-# 备份文件
+# 备份
 backups/
-data/
 
-# 文档（不需要部署）
+# 文档
 docs/
 *.md
 !README.md
 
-# 测试文件
+# 测试目录
 tests/
-test_*.py
 
-# 批处理脚本（Windows特有）
+# 批处理脚本
 *.bat
+*.ps1
 
-# 临时文件（但保留启动脚本）
-temp_collector.py
+# 部署脚本（Linux用）
+deploy.sh

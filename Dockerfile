@@ -27,5 +27,5 @@ RUN mkdir -p /app/data
 # 暴露API端口
 EXPOSE 5001
 
-# 启动命令（统一启动所有服务）
-CMD ["python", "start_all_services.py"]
+# 启动命令（直接启动API服务器）
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5001", "--timeout", "120", "cloud_api_server:app"]

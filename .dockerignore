@@ -1,0 +1,56 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+
+# 虚拟环境
+venv
+env
+ENV
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# 数据文件（会在运行时生成）
+crypto_data.db
+*.db
+
+# 日志
+*.log
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# 备份文件
+backups/
+data/
+
+# 文档（不需要部署）
+docs/
+*.md
+!README.md
+
+# 测试文件
+tests/
+test_*.py
+
+# 批处理脚本（Windows特有）
+*.bat
+
+# 临时文件
+temp_*.py

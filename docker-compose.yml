@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  # 现货数据采集器
+  eth-spot:
+    build: .
+    command: python start_test.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+    
+  btc-spot:
+    build: .
+    command: python start_btc.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+    
+  bnb-spot:
+    build: .
+    command: python start_bnb.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+    
+  sol-spot:
+    build: .
+    command: python start_sol.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+  
+  # 合约数据采集器
+  eth-futures:
+    build: .
+    command: python start_eth_futures.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+    
+  btc-futures:
+    build: .
+    command: python start_btc_futures.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+    
+  bnb-futures:
+    build: .
+    command: python start_bnb_futures.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+    
+  sol-futures:
+    build: .
+    command: python start_sol_futures.py
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
+  
+  # API服务器
+  api:
+    build: .
+    command: gunicorn -w 2 -b 0.0.0.0:5001 --timeout 120 cloud_api_server:app
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./crypto_data.db:/app/crypto_data.db
+    restart: unless-stopped
